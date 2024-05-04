@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-void backtrack(int weights[], int sol[], int totalW[], const int *nElements);
+#include <stdio.h>
+
+void backtrack(int weights[], int sol[], int totalW[],  int nElements);
 const int cap = 200;
 int main() {
 
-    int sol[6];
+    int sol[20];
     int totalW[4];
     int nElements = 1;
     int value;
@@ -18,7 +20,7 @@ int main() {
         weights[i] = 0;
     }
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 20; i++) {
         sol[i] = 0;
     }
 
@@ -31,13 +33,13 @@ int main() {
         count++;
     }
 
-    backtrack(weights, sol, totalW, &nElements);
+    backtrack(weights, sol, totalW, count);
 
 }
 
-void backtrack(int weights[20], int sol[6], int totalW[4], const int *nElements){
+void backtrack(int weights[20], int sol[6], int totalW[4], int nElements){
     int reached = 1;
-    for (int i = 0; i < *nElements;) {
+    for (int i = 0; i < nElements;) {
         sol[i]++;
         if (sol[i] == 4) {
             if (i == 0) {
@@ -61,7 +63,7 @@ void backtrack(int weights[20], int sol[6], int totalW[4], const int *nElements)
         i++;
     }
     if (reached) { //solution node
-        for (int i = 0; i < *nElements; ++i) {
+        for (int i = 0; i <nElements; ++i) {
             printf("Item:%d(weight %d)--Lorry:%d\n", i + 1, weights[i], sol[i]);
         }
         for (int i = 1; i < 4; ++i) {
